@@ -1,6 +1,8 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
+#include <iostream>
+
 namespace ariel {
 
 class Point {
@@ -18,8 +20,8 @@ public:
     void setY(double y);
     Point(double x, double y);
     Point(const Point& other);
-    double distance(Point other);
-    void toString() const;
+    double distance(Point other) const;
+    std::string toString() const;
     Point moveTowards(Point source, Point destination, double distance);
 
 };

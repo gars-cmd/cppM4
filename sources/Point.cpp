@@ -2,6 +2,7 @@
 #include <iostream>
 #include "point.hpp"
 #include <bits/stdc++.h>
+#include <string>
 
 using namespace ariel;
 
@@ -28,7 +29,10 @@ double ariel::Point::distance(Point other){
                      + std::pow(other.coord_y - this->coord_y, 2));
 }
 
-void ariel::Point::toString() const{ std::cout << this->coord_x << "," << this->coord_y << '\n'; }
+std::string ariel::Point::toString() const{
+    return std::to_string(this->coord_x) 
+               + "," 
+               + std::to_string( this->coord_y);
 
 
 //Ressources : 
