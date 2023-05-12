@@ -15,7 +15,7 @@ protected:
 
 public:
     Character();
-    ~Character();
+    virtual ~Character();
     ariel::Point getLocation() const;
     void setLocation(ariel::Point new_location);
     int getHealthPoint() const;
@@ -25,7 +25,7 @@ public:
     bool isAlive() const;
     double distance(Character* other) const;
     void hit(int damage_points);
-    void print() const;
+    virtual void print() const = 0;
 
 
 };

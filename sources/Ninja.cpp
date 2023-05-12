@@ -1,4 +1,4 @@
-#include "cowboys.hpp"
+#include "cowboy.hpp"
 #include "character.hpp"
 #include "ninja.hpp"
 #include "point.hpp"

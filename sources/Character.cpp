@@ -14,7 +14,7 @@ ariel::Character::Character(){
 
 std::string ariel::Character::getName() const{return this->name;}
 
-void ariel::Character::setName(std::string new_name){ this->name = new_name; }
+void ariel::Character::setName(const std::string new_name){ this->name = new_name; }
 
 int ariel::Character::getHealthPoint() const{return this->healthPoint;}
 

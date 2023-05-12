@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "cowboys.hpp"
+#include "cowboy.hpp"
 #include "ninja.hpp"
 #include "point.hpp"
 #include <iostream>

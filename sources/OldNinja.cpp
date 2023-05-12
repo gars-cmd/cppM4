@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "cowboys.hpp"
+#include "cowboy.hpp"
 #include "ninja.hpp"
-#include "oldninja.hpp"
+#include "OldNinja.hpp"
 #include "point.hpp"
 #include <iostream>
 #include <string>
@@ -16,7 +16,7 @@ ariel::OldNinja::OldNinja(){
     this->healthPoint = OLD_HP;
 }
 
-ariel::OldNinja::OldNinja(std::string name, ariel::Point location){
+ariel::OldNinja::OldNinja(const std::string name, ariel::Point location){
     this->speed = OLD_SPEED;
     this->healthPoint = OLD_HP;
     this->location = location;
@@ -32,7 +32,7 @@ ariel::OldNinja::OldNinja(ariel::Point location){
 }
 
 
-ariel::OldNinja::OldNinja(std::string name){
+ariel::OldNinja::OldNinja( const std::string name){
     this->speed = OLD_SPEED;
     this->healthPoint = OLD_HP;
     this->location = ariel::Point();

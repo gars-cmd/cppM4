@@ -25,4 +25,4 @@ public:
 };
 
 }
-#endif // COWBOYS
+#endif // NINJA

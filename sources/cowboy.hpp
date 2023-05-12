@@ -1,5 +1,5 @@
-#ifndef COWBOYS_HPP
-#define COWBOYS_HPP
+#ifndef COWBOY_HPP
+#define COWBOY_HPP
 
 #include "point.hpp"
 #include "character.hpp"
@@ -8,16 +8,16 @@
 
 namespace ariel {
 
-class Cowboys : public Character {
+class Cowboy : public Character {
 protected:
     int bullet_ammount;
 
 public:
-    Cowboys();
-    ~Cowboys();
-    Cowboys(std::string name);
-    Cowboys(std::string name, ariel::Point location);
-    Cowboys(ariel::Point location);
+    Cowboy();
+    ~Cowboy();
+    Cowboy(std::string name);
+    Cowboy(std::string name, ariel::Point location);
+    Cowboy(ariel::Point location);
     int getBulletAmmount() const;
     void print() const;
     bool hasBullets() const;
@@ -26,4 +26,4 @@ public:
 };
 
 }
-#endif // COWBOYS
+#endif // COWBOY

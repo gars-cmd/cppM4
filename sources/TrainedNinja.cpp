@@ -16,7 +16,7 @@ ariel::TrainedNinja::TrainedNinja(){
     this->healthPoint = TRAINED_HP;
 }
 
-ariel::TrainedNinja::TrainedNinja(std::string name, ariel::Point location){
+ariel::TrainedNinja::TrainedNinja(const std::string name, ariel::Point location){
     this->speed = TRAINED_SPEED;
     this->healthPoint = TRAINED_HP;
     this->location = location;
@@ -32,7 +32,7 @@ ariel::TrainedNinja::TrainedNinja(ariel::Point location){
 }
 
 
-ariel::TrainedNinja::TrainedNinja(std::string name){
+ariel::TrainedNinja::TrainedNinja(const std::string name){
     this->speed = TRAINED_SPEED;
     this->healthPoint = TRAINED_HP;
     this->location = ariel::Point();
