@@ -1,6 +1,6 @@
 #include <iostream>
-#include "point.hpp"
-#include "character.hpp"
+#include "Point.hpp"
+#include "Character.hpp"
 
 using namespace ariel;
 
@@ -18,6 +18,10 @@ void ariel::Character::setName(const std::string new_name){ this->name = new_nam
 
 int ariel::Character::getHealthPoint() const{return this->healthPoint;}
 
+bool ariel::Character::isATeamMember() const{return this->boolTeamMember;}
+
+void ariel::Character::setTeamMember(){this->boolTeamMember = true;}
+
 void ariel::Character::setHealthPoint(int newPoint){
     this->healthPoint = newPoint;
 }
@@ -33,15 +37,9 @@ bool ariel::Character::isAlive() const{
 }
 
 double ariel::Character::distance(Character *other) const{
-    return this->location.distance(this->location);
+    return this->location.distance(other->location);
 }
 
 void ariel::Character::hit(int damage_points){
     this->healthPoint = (damage_points > this->healthPoint ? 0 : this->healthPoint - damage_points);
 }
-
-
-
-
-
-

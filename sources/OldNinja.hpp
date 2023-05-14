@@ -1,7 +1,11 @@
-#include "character.hpp"
-#include "cowboy.hpp"
-#include "ninja.hpp"
-#include "point.hpp"
+#ifndef OLDNINJA
+#define OLDNINJA
+
+
+#include "Character.hpp"
+#include "Cowboy.hpp"
+#include "Ninja.hpp"
+#include "Point.hpp"
 #include <iostream>
 #include <string>
 
@@ -9,7 +13,7 @@
 
 namespace ariel {
 
-class OldNinja : public Ninja {
+class OldNinja : public ariel::Ninja {
 public:
     OldNinja();
     OldNinja(std::string name, ariel::Point location);
@@ -19,3 +23,4 @@ public:
 
 } // namespace ariel
 
+#endif // !OLDNINJA

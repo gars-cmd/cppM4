@@ -1,6 +1,10 @@
-#include "character.hpp"
-#include "ninja.hpp"
-#include "point.hpp"
+
+#ifndef YOUNGNINJA
+#define YOUNGNINJA
+
+#include "Character.hpp"
+#include "Ninja.hpp"
+#include "Point.hpp"
 #include <iostream>
 #include <string>
 
@@ -18,3 +22,4 @@ public:
 
 } // namespace ariel
 
+#endif //YOUNGNINJA

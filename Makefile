@@ -1,7 +1,7 @@
 #!make -f
 
-CXX=clang++-14
-TIDY=clang-tidy-14
+CXX=clang++-15
+TIDY=clang-tidy
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects

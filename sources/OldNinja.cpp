@@ -1,8 +1,8 @@
-#include "character.hpp"
-#include "cowboy.hpp"
-#include "ninja.hpp"
+#include "Character.hpp"
+#include "Cowboy.hpp"
+#include "Ninja.hpp"
 #include "OldNinja.hpp"
-#include "point.hpp"
+#include "Point.hpp"
 #include <iostream>
 #include <string>
 
@@ -28,7 +28,7 @@ ariel::OldNinja::OldNinja(ariel::Point location){
     this->speed = OLD_SPEED;
     this->healthPoint = OLD_HP;
     this->location = location;
-    this->name = "UKNOWN";
+    this->name = "UNKNOWN";
 }
 
 

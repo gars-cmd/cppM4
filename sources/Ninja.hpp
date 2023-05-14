@@ -1,14 +1,14 @@
 #ifndef NINJA_HPP
 #define NINJA_HPP
 
-#include "point.hpp"
-#include "character.hpp"
+#include "Point.hpp"
+#include "Character.hpp"
 #include <iostream>
 #include <string>
 
 namespace ariel {
 
-class Ninja : public Character {
+class Ninja : public ariel::Character {
 protected:
     int speed;
 
@@ -19,7 +19,7 @@ public:
     Ninja(std::string name, ariel::Point location);
     Ninja(ariel::Point location);
     int getSpeed() const;
-    void print() const;
+    std::string print() const;
     void move(Character* other);
     void slash(Character* other);
 };

@@ -1,10 +1,10 @@
-#ifndef SMARTTEAM_HPP
-#define SMARTTEAM_HPP
+#ifndef TEAM2_HPP
+#define TEAM2_HPP
 
-#include "point.hpp"
-#include "character.hpp"
-#include "ninja.hpp"
-#include "cowboy.hpp"
+#include "Point.hpp"
+#include "Character.hpp"
+#include "Ninja.hpp"
+#include "Cowboy.hpp"
 #include "Team.hpp"
 #include <iostream>
 #include <string>

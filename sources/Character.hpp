@@ -1,7 +1,7 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "point.hpp"
+#include "Point.hpp"
 #include <iostream>
 #include <string>
 
@@ -12,6 +12,7 @@ protected:
     ariel::Point location;
     int healthPoint;
     std::string name;
+    bool boolTeamMember = false;
 
 public:
     Character();
@@ -19,13 +20,15 @@ public:
     ariel::Point getLocation() const;
     void setLocation(ariel::Point new_location);
     int getHealthPoint() const;
+    bool isATeamMember() const;
+    void setTeamMember();
     void setHealthPoint(int newPoint );
     std::string getName() const;
     void  setName(std::string new_name);
     bool isAlive() const;
     double distance(Character* other) const;
     void hit(int damage_points);
-    virtual void print() const = 0;
+    virtual std::string print() const = 0;
 
 
 };

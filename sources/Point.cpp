@@ -1,6 +1,6 @@
 #include <cstring>
 #include <iostream>
-#include "point.hpp"
+#include "Point.hpp"
 #include <bits/stdc++.h>
 #include <string>
 
@@ -24,7 +24,7 @@ void ariel::Point::setX(double x){this->coord_x = x;}
 
 void ariel::Point::setY(double y){this->coord_y = y;}
 
-double ariel::Point::distance(Point other){
+double ariel::Point::distance(Point other) const{
     return std::sqrt(std::pow(other.coord_x - this->coord_x, 2)
                      + std::pow(other.coord_y - this->coord_y, 2));
 }
@@ -33,6 +33,7 @@ std::string ariel::Point::toString() const{
     return std::to_string(this->coord_x) 
                + "," 
                + std::to_string( this->coord_y);
+}
 
 
 //Ressources : 

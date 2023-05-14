@@ -1,8 +1,8 @@
 #ifndef COWBOY_HPP
 #define COWBOY_HPP
 
-#include "point.hpp"
-#include "character.hpp"
+#include "Point.hpp"
+#include "Character.hpp"
 #include <iostream>
 #include <string>
 
@@ -19,7 +19,7 @@ public:
     Cowboy(std::string name, ariel::Point location);
     Cowboy(ariel::Point location);
     int getBulletAmmount() const;
-    void print() const;
+    std::string print() const;
     bool hasBullets() const;
     void reload();
     void shoot( ariel::Character* other);
