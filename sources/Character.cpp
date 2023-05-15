@@ -43,3 +43,6 @@ double ariel::Character::distance(Character *other) const{
 void ariel::Character::hit(int damage_points){
     this->healthPoint = (damage_points > this->healthPoint ? 0 : this->healthPoint - damage_points);
 }
+
+
+

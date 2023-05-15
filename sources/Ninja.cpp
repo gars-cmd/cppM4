@@ -26,7 +26,24 @@ int ariel::Ninja::getSpeed()const{
 }
 
 void ariel::Ninja::move(Character *other){
-    //TODO implementation
+    double directionX = other->getLocation().getX()
+            - this->getLocation().getX();
+    double directionY = other->getLocation().getY()
+            - this->getLocation().getY();
+    double distance = this->distance(other);
+    directionX /= distance; directionY /= distance;
+    bool isBehind =  (directionX * (other->getLocation().getX() - this->location.getX()))
+        + (directionY * (other->getLocation().getY() - this->location.getY())) < 0 ;
+    double dx,dy;
+    if (isBehind) {
+        dx = -directionX * this->speed;
+        dy = -directionY * this->speed;
+    }else {
+        dx = directionX * this->speed;
+        dy = directionY * this->speed;
+    }
+    this->getLocation().setX(dx);
+    this->getLocation().setY(dy);
 }
 
 std::string ariel::Ninja::print() const{

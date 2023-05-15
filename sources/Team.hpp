@@ -18,6 +18,7 @@ protected:
     ariel::Character* arrTeam[10] = {};
     ariel::Character* leader;
     int size;
+    // need to add an id to hanfle self arm between members
 
 
 
