@@ -10,14 +10,18 @@
 #include "YoungNinja.hpp"
 #include <iostream>
 #include <string>
+#include <vector>
 
 namespace ariel {
 
 class Team {
+private:
+    static int nextId;
 protected:
-    ariel::Character* arrTeam[10] = {};
+    std::vector<ariel::Character*> vectorTeam();
     ariel::Character* leader;
-    int size;
+    int size = 0;
+    int id = nextId++;
     // need to add an id to hanfle self arm between members
 
 
@@ -28,7 +32,7 @@ public:
     void add(ariel::Character* new_player);
     int getSize() const;
     void setSize(int newSize);
-    ariel::Character** getArr();
+    std::vector<Character*> getVec();
     virtual void sort();
     ariel::Character* getLeader() const;
     void setLeader(ariel::Character& leader);

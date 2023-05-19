@@ -9,28 +9,30 @@
 #include <limits>
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 
 using namespace ariel;
 
 ariel::Team::~Team(){
-    for (ariel::Character* player : this->arrTeam) {
+    for (ariel::Character* player : this->vectorTeam()) {
         delete player;
     }
 }
 
 ariel::Team::Team( ariel::Character* leader){
     this->leader = leader;
+    this->vectorTeam().reserve(10);
+    this->vectorTeam().push_back(leader);
     this->size = 1;
-    this->arrTeam[0] = leader;
 }
 
 int ariel::Team::getSize() const{
     return  this->size;
 }
 
-ariel::Character** ariel::Team::getArr(){
-    return this->arrTeam;
+std::vector<Character*> ariel::Team::getVec(){
+    return this->vectorTeam();
 }
 
 void ariel::Team::add(ariel::Character* new_player){
@@ -41,7 +43,7 @@ void ariel::Team::add(ariel::Character* new_player){
     }
     else {
         new_player->setTeamMember();
-        this->arrTeam[this->size] = new_player;
+        this->vectorTeam().push_back(new_player);
         this->size++;
     }
 }
@@ -76,7 +78,7 @@ void ariel::Team::replaceLeader(){
 ariel::Character* ariel::Team::getCloserFromLeader(){
     ariel::Character* theCloser = nullptr;
     double minDistance = std::numeric_limits<double>::max();
-    for (ariel::Character* player : this->arrTeam) {
+    for (ariel::Character* player : this->vectorTeam()) {
         if ( (this->leader != player) && (player->isAlive()) ) {
             double tempDistance = player->distance(this->leader);
             if (minDistance > tempDistance) {
@@ -89,19 +91,17 @@ ariel::Character* ariel::Team::getCloserFromLeader(){
 }
 
 int ariel::Team::stillAlive(){
-    // int counter = 0;
-    // for (ariel::Character* player : this->arrTeam) {
-    //     if (player->isAlive()) {
-    //         counter++;
-    //     }
-    // }
-    // return counter;
-    //
-    return 0;
+    int counter = 0;
+    for (ariel::Character* player : this->vectorTeam()) {
+        if (player->getHealthPoint() > 0) {
+            counter++;
+        }
+    }
+    return counter;
 }
 
 void ariel::Team::print(){
-    for (ariel::Character* player : this->arrTeam) {
+    for (ariel::Character* player : this->vectorTeam()) {
         player->print();
     }
 }
