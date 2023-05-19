@@ -11,6 +11,7 @@ ariel::Ninja::~Ninja() {}
 ariel::Ninja::Ninja() {
     this->name = "UNKNOWN";
     this->location = ariel::Point();
+    this->isNinja = true;
     this->speed = 0;
     this->healthPoint = 0;
 }

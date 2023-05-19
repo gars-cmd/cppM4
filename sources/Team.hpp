@@ -16,13 +16,12 @@ namespace ariel {
 
 class Team {
 private:
-    static int nextId;
+    static int nextId ;
 protected:
     std::vector<ariel::Character*> vectorTeam();
     ariel::Character* leader;
     int size = 0;
     int id = nextId++;
-    // need to add an id to hanfle self arm between members
 
 
 
@@ -36,6 +35,7 @@ public:
     virtual void sort();
     ariel::Character* getLeader() const;
     void setLeader(ariel::Character& leader);
+    int indexOfLastSortedCowboy() ;
     int stillAlive();
     void attack(ariel::Team* ennemyTeam);
     virtual void print();

@@ -22,6 +22,10 @@ bool ariel::Character::isATeamMember() const{return this->boolTeamMember;}
 
 void ariel::Character::setTeamMember(){this->boolTeamMember = true;}
 
+bool ariel::Character::isNinja() const{
+    return this->boolIsNinja;
+}
+
 void ariel::Character::setHealthPoint(int newPoint){
     this->healthPoint = newPoint;
 }

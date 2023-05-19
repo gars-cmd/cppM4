@@ -22,7 +22,7 @@ ariel::Team::~Team(){
 
 ariel::Team::Team( ariel::Character* leader){
     this->leader = leader;
-    this->vectorTeam().reserve(10);
+    this->vectorTeam().resize(10,nullptr); //resize to 10 and fill everything with nullptr
     this->vectorTeam().push_back(leader);
     this->size = 1;
 }
@@ -60,9 +60,23 @@ void ariel::Team::setLeader(ariel::Character &leader){
     this->leader = &leader;
 }
 
+int ariel::Team::indexOfLastSortedCowboy() {
+    int pos = 0;
+    while ( (!this->vectorTeam()[pos]->isNinja()) && (pos < this->size) ) {
+        pos++;
+    }
+    return pos;
+}
+
 void ariel::Team::sort(){
-//TODO implement
-    //First the cowboys , Next the Ninja
+    int lastSortedCowboy = this->indexOfLastSortedCowboy();
+    for (int i = lastSortedCowboy ; i<this->size ; i++) {
+        if (!player->isNinja()) {
+            this->vectorTeam().insert()
+        }
+    
+    }
+
 }
 
 bool ariel::Team::isLeaderAlive(){

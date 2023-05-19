@@ -14,6 +14,7 @@ ariel::YoungNinja::YoungNinja(){
     this->location = ariel::Point();
     this->speed = YOUNG_SPEED;
     this->healthPoint = YOUNG_HP;
+    this->isNinja = true;
 }
 
 ariel::YoungNinja::YoungNinja(const std::string name, ariel::Point location){
@@ -21,6 +22,7 @@ ariel::YoungNinja::YoungNinja(const std::string name, ariel::Point location){
     this->healthPoint = YOUNG_HP;
     this->location = location;
     this->name = name;
+    this->isNinja = true;
 }
 
 
@@ -29,6 +31,7 @@ ariel::YoungNinja::YoungNinja(ariel::Point location){
     this->healthPoint = YOUNG_HP;
     this->location = location;
     this->name = "UNKNOWN";
+    this->isNinja = true;
 }
 
 
@@ -37,4 +40,5 @@ ariel::YoungNinja::YoungNinja(const std::string name){
     this->healthPoint = YOUNG_HP;
     this->location = ariel::Point();
     this->name = name;
+    this->isNinja = true;
 }
