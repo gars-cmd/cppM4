@@ -19,10 +19,11 @@ public:
     Cowboy(std::string name, ariel::Point location);
     Cowboy(ariel::Point location);
     int getBulletAmmount() const;
-    std::string print() const;
-    bool hasBullets() const;
+    std::string print() const override;
+    bool hasboolets() const;
     void reload();
-    void shoot( ariel::Character* other);
+    void shoot( ariel::Character* other) ;
+    void attack( ariel::Character* other) override;
 };
 
 }

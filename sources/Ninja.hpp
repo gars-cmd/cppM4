@@ -19,9 +19,10 @@ public:
     Ninja(std::string name, ariel::Point location);
     Ninja(ariel::Point location);
     int getSpeed() const;
-    std::string print() const;
+    std::string print() const override;
     void move(Character* other);
     void slash(Character* other);
+    void attack(Character* other) override;
 };
 
 }

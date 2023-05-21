@@ -13,7 +13,7 @@ protected:
     ariel::Point location;
     int healthPoint;
     std::string name;
-    bool boolTeamMember = false;
+    int TeamId = -1;
     bool boolIsNinja = false;
 
 public:
@@ -24,7 +24,8 @@ public:
     int getHealthPoint() const;
     bool isATeamMember() const;
     bool isNinja() const;
-    void setTeamMember();
+    void setTeamMember(int new_id);
+    virtual void attack(ariel::Character* victim) = 0;
     void setHealthPoint(int newPoint );
     std::string getName() const;
     void  setName(std::string new_name);

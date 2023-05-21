@@ -48,4 +48,5 @@ int main() {
      else cout << "winner is team_B" << endl;
 
      return 0; // no memory issues. Team should free the memory of its members. both a and b teams are on the stack. 
+
 }

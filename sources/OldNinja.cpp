@@ -14,7 +14,7 @@ ariel::OldNinja::OldNinja(){
     this->location = ariel::Point();
     this->speed = OLD_SPEED;
     this->healthPoint = OLD_HP;
-    this->isNinja = true;
+    this->boolIsNinja = true;
 }
 
 ariel::OldNinja::OldNinja(const std::string name, ariel::Point location){
@@ -22,7 +22,7 @@ ariel::OldNinja::OldNinja(const std::string name, ariel::Point location){
     this->healthPoint = OLD_HP;
     this->location = location;
     this->name = name;
-    this->isNinja = true;
+    this->boolIsNinja = true;
 }
 
 
@@ -31,7 +31,7 @@ ariel::OldNinja::OldNinja(ariel::Point location){
     this->healthPoint = OLD_HP;
     this->location = location;
     this->name = "UNKNOWN";
-    this->isNinja = true;
+    this->boolIsNinja = true;
 }
 
 
@@ -40,5 +40,5 @@ ariel::OldNinja::OldNinja( const std::string name){
     this->healthPoint = OLD_HP;
     this->location = ariel::Point();
     this->name = name;
-    this->isNinja = true;
+    this->boolIsNinja = true;
 }

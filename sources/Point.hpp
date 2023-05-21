@@ -22,7 +22,7 @@ public:
     Point(const Point& other);
     double distance(Point other) const;
     std::string toString() const;
-    Point moveTowards(Point source, Point destination, double distance);
+    static Point moveTowards(const Point& source, const Point& destination, double distance);
 
 };
 

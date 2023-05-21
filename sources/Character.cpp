@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "Point.hpp"
 #include "Character.hpp"
 
@@ -18,9 +19,9 @@ void ariel::Character::setName(const std::string new_name){ this->name = new_nam
 
 int ariel::Character::getHealthPoint() const{return this->healthPoint;}
 
-bool ariel::Character::isATeamMember() const{return this->boolTeamMember;}
+bool ariel::Character::isATeamMember() const{return this->TeamId != -1;}
 
-void ariel::Character::setTeamMember(){this->boolTeamMember = true;}
+void ariel::Character::setTeamMember(int new_id){this->TeamId = new_id;}
 
 bool ariel::Character::isNinja() const{
     return this->boolIsNinja;
@@ -45,7 +46,11 @@ double ariel::Character::distance(Character *other) const{
 }
 
 void ariel::Character::hit(int damage_points){
-    this->healthPoint = (damage_points > this->healthPoint ? 0 : this->healthPoint - damage_points);
+    if (damage_points < 0) {
+        throw std::invalid_argument("no negative dammage point allowed");
+    }else {
+        this->healthPoint = (damage_points > this->healthPoint ? 0 : this->healthPoint - damage_points);
+    }
 }
 
 
