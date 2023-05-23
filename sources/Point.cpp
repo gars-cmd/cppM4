@@ -16,20 +16,42 @@ ariel::Point::Point(const Point& other){
     std::memcpy(this, &other, sizeof(ariel::Point));
 }
 
-ariel::Point::Point(double x, double y):coord_x(x),coord_y(y){}
+// copy assignment constructor
+Point& Point::operator=(const Point& other) {
+    if (this != &other) {
+        coord_x = other.coord_x;
+        coord_y = other.coord_y;
+    }
+    return *this;
+}
+
+//move constructor
+Point::Point(Point&& other) noexcept {
+    coord_x = std::exchange(other.coord_x, 0);
+    coord_y = std::exchange(other.coord_y, 0);
+}
+
+//move assignment operator
+Point& Point::operator=(Point&& other) noexcept {
+    if (this != &other) {
+        coord_x = std::exchange(other.coord_x, 0);
+        coord_y = std::exchange(other.coord_y, 0);
+    }
+    return *this;
+}
+
+ariel::Point::Point(double var_x, double var_y):coord_x(var_x),coord_y(var_y){}
 
 double ariel::Point::getX() const{return this->coord_x;}
 
 double ariel::Point::getY() const{return this->coord_y;}
 
-void ariel::Point::setX(double x){this->coord_x = x;}
+void ariel::Point::setX(double var_x){this->coord_x = var_x;}
 
-void ariel::Point::setY(double y){this->coord_y = y;}
+void ariel::Point::setY(double var_y){this->coord_y = var_y;}
 
 double ariel::Point::distance(Point other) const{
-    double exact_distance =std::sqrt(std::pow(other.coord_x - this->coord_x, 2)
-                         + std::pow(other.coord_y - this->coord_y, 2));
-    return std::round(exact_distance * 1000) / 1000;
+    return std::sqrt(std::pow(other.getX() - this->getX(), 2) + std::pow(other.getY() - this->getY(), 2));
 }
 
 std::string ariel::Point::toString() const{
@@ -42,14 +64,17 @@ ariel::Point ariel::Point::moveTowards(const ariel::Point& source, const ariel::
     if (distance < 0 ) {
         throw std::invalid_argument("distance cannot be negative");
     }
-    double total_distance = source.distance(destination);
-    if (total_distance <= distance) {
+    double distanceFromTo = source.distance(destination);
+    if (distanceFromTo <= distance) {
         return destination;
     }
-    double distanceRatio = distance / total_distance;
-    double new_x = source.getX() + ( (destination.getX() - source.getX()) * distanceRatio );
-    double new_y = source.getY() + ( (destination.getY() - source.getY()) * distanceRatio );
-    return ariel::Point(new_x, new_y);
+    else {
+    double distanceRatio = distance / distanceFromTo;
+    double diff_x = destination.getX() - source.getX();
+    double diff_y = destination.getY() - source.getY();
+    ariel::Point point = ariel::Point(source.getX() + distanceRatio * diff_x, source.getY() + distanceRatio * diff_y);
+    return point;
+    }
 }
 
 

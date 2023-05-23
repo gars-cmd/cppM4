@@ -17,19 +17,20 @@ namespace ariel {
 
 class Team {
 private:
-protected:
     std::vector<ariel::Character*> vectorTeam;
     ariel::Character* leader;
     int size = 0;
     int id = 0;
 
-
-
 public:
     Team(ariel::Character* leader);
-    ~Team();
+    virtual ~Team();
     void add(ariel::Character* new_player);
     int getSize() const;
+    Team& operator=(const Team& other); // Copy assignment operator
+    Team(Team&& other) noexcept; // Move constructor
+    Team& operator=(Team&& other) noexcept;// Move assignment operator
+    Team(const Team& other);
     void setSize(int newSize);
     std::vector<Character*> getVec();
     virtual void sort();
@@ -45,7 +46,10 @@ public:
     std::size_t firstNinjaIndex();
     ariel::Character* getCloserFromLeaderIntern();
     ariel::Character* getCloserFromLeaderExtern(ariel::Team* otherTeam);
+    void addErrorHandler(ariel::Character* new_player);
     void moveSaveAddOrder(std::size_t last_continues_cowboy_index, std::size_t cowboy_index);
+    void attackErrorHandler(ariel::Team *ennemyTeam);
+    void liveReplacement(ariel::Team *ennemyTeam);
 };
 
 }

@@ -10,15 +10,17 @@
 #include <string>
 
 
+constexpr int OLD_SPEED = 8;
+constexpr int OLD_HP = 150;
 
 namespace ariel {
 
-class OldNinja : public ariel::Ninja {
+class OldNinja : public Ninja {
+private:
+    int speed;
+    int healthPoint;
 public:
-    OldNinja();
-    OldNinja(std::string name, ariel::Point location);
-    OldNinja(std::string name);
-    OldNinja(ariel::Point location);
+    OldNinja(const std::string& name = "UNKNOWN", const Point& location = Point(), int speed = OLD_SPEED, int healthPoint = OLD_HP);
 };
 
 } // namespace ariel

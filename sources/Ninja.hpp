@@ -9,17 +9,14 @@
 namespace ariel {
 
 class Ninja : public ariel::Character {
-protected:
+private:
+    int healthPoint;
     int speed;
-
 public:
-    Ninja();
-    ~Ninja();
-    Ninja(std::string name);
-    Ninja(std::string name, ariel::Point location);
-    Ninja(ariel::Point location);
+    Ninja(const std::string& name = "UNKNOWN", const Point& location = Point(), int speed = 0, int healthPoint = 0);
     int getSpeed() const;
     std::string print() const override;
+    void setSpeed(int speed);
     void move(Character* other);
     void slash(Character* other);
     void attack(Character* other) override;

@@ -6,39 +6,7 @@
 #include <iostream>
 #include <string>
 
-#define OLD_SPEED 8
-#define OLD_HP 150
 
-ariel::OldNinja::OldNinja(){
-    this->name = "UNKNOWN";
-    this->location = ariel::Point();
-    this->speed = OLD_SPEED;
-    this->healthPoint = OLD_HP;
-    this->boolIsNinja = true;
-}
+ariel::OldNinja::OldNinja(const std::string& name, const Point& location, int speed, int healthPoint)
+: ariel::Ninja(name, location, speed, healthPoint){}
 
-ariel::OldNinja::OldNinja(const std::string name, ariel::Point location){
-    this->speed = OLD_SPEED;
-    this->healthPoint = OLD_HP;
-    this->location = location;
-    this->name = name;
-    this->boolIsNinja = true;
-}
-
-
-ariel::OldNinja::OldNinja(ariel::Point location){
-    this->speed = OLD_SPEED;
-    this->healthPoint = OLD_HP;
-    this->location = location;
-    this->name = "UNKNOWN";
-    this->boolIsNinja = true;
-}
-
-
-ariel::OldNinja::OldNinja( const std::string name){
-    this->speed = OLD_SPEED;
-    this->healthPoint = OLD_HP;
-    this->location = ariel::Point();
-    this->name = name;
-    this->boolIsNinja = true;
-}

@@ -9,15 +9,17 @@
 #include <string>
 
 
+constexpr int YOUNG_SPEED = 14;
+constexpr int YOUNG_HP =  100;
 
 namespace ariel {
 
 class YoungNinja : public Ninja {
+private:
+    int speed;
+    int healthPoint;
 public:
-    YoungNinja();
-    YoungNinja(std::string name, ariel::Point location);
-    YoungNinja(std::string name);
-    YoungNinja(ariel::Point location);
+    YoungNinja(const std::string& name = "UNKNOWN", const Point& location = Point(), int speed = YOUNG_SPEED, int healthPoint = YOUNG_HP);
 };
 
 } // namespace ariel

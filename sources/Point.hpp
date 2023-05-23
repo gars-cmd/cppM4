@@ -14,11 +14,14 @@ private:
 public:
     Point();
     ~Point();
+    Point& operator=(const Point& other);
+    Point(Point&& other) noexcept;
+    Point& operator=(Point&& other) noexcept;
     double getX() const;
     double getY() const;
-    void setX(double x);
-    void setY(double y);
-    Point(double x, double y);
+    void setX(double var_x);
+    void setY(double var_y);
+    Point(double var_x, double var_y);
     Point(const Point& other);
     double distance(Point other) const;
     std::string toString() const;

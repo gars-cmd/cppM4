@@ -15,7 +15,7 @@ using namespace ariel;
 
 
 void ariel::Team2::sort(){
-//TODO implement according to the insert order , leader first ...
+    
 }
 
 

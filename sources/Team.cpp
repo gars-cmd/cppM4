@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstddef>
+#include <cstdlib>
 #include <iostream>
 #include "Point.hpp"
 #include "Character.hpp"
@@ -25,11 +26,74 @@ ariel::Team::~Team(){
 
 ariel::Team::Team( ariel::Character* leader){
     this->leader = leader;
-    this->vectorTeam.reserve(10); //resize to 10 and fill everything with nullptr
+    this->vectorTeam.reserve(10);
     this->id = nextId++;
     this->add(leader);
     this->size = 1;
 }
+
+//Copy constructor
+Team::Team(const Team& other) {
+    leader = nullptr;
+    *this = other;
+}
+
+// Copy assignment operator
+Team& Team::operator=(const Team& other) {
+    if (this == &other) {
+        return *this;
+    }
+    for (ariel::Character* player : vectorTeam) {
+        delete player;
+    }
+    vectorTeam.clear();
+
+    for (ariel::Character* player : other.vectorTeam) {
+        if (player->isNinja()) {
+            vectorTeam.push_back(new ariel::Ninja(*dynamic_cast<Ninja*>(player)));
+        }else {
+            vectorTeam.push_back(new ariel::Cowboy(*dynamic_cast<Cowboy*>(player)));
+        }
+    }
+    leader = nullptr;
+    for (Character* player : vectorTeam) {
+        if (player->getTeamID() == other.leader->getTeamID()) {
+            leader = player;
+        }
+        player->setTeamMember(id);
+    }
+    size = other.size;
+    return *this;
+}
+
+// Move constructor
+Team::Team(Team&& other) noexcept
+: vectorTeam(std::move(other.vectorTeam)), leader(other.leader), id(other.id), size(other.size) {
+    other.leader = nullptr;
+    other.id = 0;
+    other.size = 0;
+}
+
+// Move assignment operator
+Team& Team::operator=(Team&& other) noexcept {
+    if (this == &other) {
+        return *this;
+    }
+    for (Character* player : vectorTeam) {
+        delete player;
+    }
+    vectorTeam.clear();
+    vectorTeam = std::move(other.vectorTeam);
+    leader = other.leader;
+    for (Character* player : vectorTeam) {
+        player->setTeamMember(id);
+    }
+    other.leader = nullptr;
+    other.id = 0;
+    other.size = 0;
+    return *this;
+}
+
 
 int ariel::Team::getSize() const{
     return  this->size;
@@ -39,17 +103,19 @@ std::vector<Character*> ariel::Team::getVec(){
     return this->vectorTeam;
 }
 
-void ariel::Team::add(ariel::Character* new_player){
+void ariel::Team::addErrorHandler(ariel::Character* new_player){
     if (this->size >= 10) {
         throw std::runtime_error("the team is already full");
-    } else if (new_player->isATeamMember()) {
+    }else if(new_player->isATeamMember()){
         throw std::runtime_error("the member is already in a team");
-    }
-    else {
-        new_player->setTeamMember(this->id);
-        this->vectorTeam.push_back(new_player);
-        this->size++;
-    }
+    }else {}
+}
+
+void ariel::Team::add(ariel::Character* new_player){
+    this->addErrorHandler(new_player);
+    new_player->setTeamMember(this->id);
+    this->vectorTeam.push_back(new_player);
+    this->size++;
     this->sort();
 }
 
@@ -67,13 +133,14 @@ void ariel::Team::setLeader(ariel::Character &leader){
 
 std::size_t ariel::Team::indexOfLastSortedCowboy() {
     if (this->vectorTeam.size()== 0) {
-        std::cout << "the vector is empty" << '\n';
+        return std::numeric_limits<std::size_t>::max();
+    }else {
+        std::size_t pos = 0;
+        while ( (!this->vectorTeam.at(pos)->isNinja()) && (pos <= this->size) ) {
+            pos++;
+        }
+        return ( pos-1 );
     }
-    std::size_t pos = 0;
-    while ( (!this->vectorTeam.at(pos)->isNinja()) && (pos <= this->size) ) {
-        pos++;
-    }
-    return ( pos-1 );
 }
 
 void ariel::Team::moveSaveAddOrder(std::size_t last_continues_cowboy_index, std::size_t next_cowboy_index){
@@ -114,9 +181,11 @@ bool ariel::Team::isSorted(){
 void ariel::Team::sort(){
     if (!this->isSorted()) {
         std::size_t lastSortedCowboy = this->indexOfLastSortedCowboy();
-        for (std::size_t i = lastSortedCowboy+1 ; i<this->size ; i++) {
-            if (!this->vectorTeam.at(i)->isNinja()) {
-                this->moveSaveAddOrder(lastSortedCowboy, i);
+        if (lastSortedCowboy < 10) {
+            for (std::size_t i = lastSortedCowboy+1 ; i<this->size ; i++) {
+                if (!this->vectorTeam.at(i)->isNinja()) {
+                    this->moveSaveAddOrder(lastSortedCowboy, i);
+                }
             }
         }
     }
@@ -136,7 +205,7 @@ ariel::Character* ariel::Team::getCloserFromLeaderIntern(){
     ariel::Character* theCloser = nullptr;
     double minDistance = std::numeric_limits<double>::max();
     for (ariel::Character* player : this->vectorTeam) {
-        if ( (player->isAlive()) ) {
+        if ( player->isAlive() ) {
             double tempDistance = player->distance(this->leader);
             if (minDistance > tempDistance) {
                 minDistance = tempDistance;
@@ -178,22 +247,35 @@ void ariel::Team::print(){
     }
 }
 
+void ariel::Team::attackErrorHandler(ariel::Team *ennemyTeam){
+    if (ennemyTeam == nullptr) {
+        throw std::invalid_argument("ennemy team = nullptr");
+    }else if (ennemyTeam->stillAlive() == 0) {
+        throw std::runtime_error("ennemyTeam is dead");
+    }
+}
+
+void ariel::Team::liveReplacement(ariel::Team *ennemyTeam){
+    if (!this->isLeaderAlive() && (this->getCloserFromLeaderIntern() != nullptr) ) {
+        this->replaceLeader();
+    }
+    if (!ennemyTeam->isLeaderAlive() && ennemyTeam->getCloserFromLeaderIntern()!=nullptr) {
+        ennemyTeam->replaceLeader();
+    }
+}
+
 
 void ariel::Team::attack(ariel::Team *ennemyTeam){
-    if (ennemyTeam == nullptr) {
-        throw std::invalid_argument("nullptr was given");
-    }
-    if (ennemyTeam->stillAlive() == 0) {
-        std::cout << "there is no ennemy" << std::endl;
-    }else {
-        if (!ennemyTeam->isLeaderAlive()) {
-            ennemyTeam->replaceLeader();
-        }
-        ariel::Character* new_victim = this->getCloserFromLeaderExtern(ennemyTeam);
+    this->attackErrorHandler(ennemyTeam);
+    this->liveReplacement(ennemyTeam);
+    if (ennemyTeam != nullptr && ennemyTeam->stillAlive()!=0) {
         for (ariel::Character* player : this->vectorTeam) {
-            player->attack(new_victim);
-            if (new_victim->getHealthPoint() == 0) {
-                new_victim = this->getCloserFromLeaderExtern(ennemyTeam);
+            this->liveReplacement(ennemyTeam);
+            ariel::Character* new_victim = this->getCloserFromLeaderExtern(ennemyTeam);
+            if (new_victim!=nullptr) {
+                if (player!=nullptr && player->isAlive() && new_victim->isAlive()) {
+                    player->attack(new_victim);
+                }
             }
         }
     }

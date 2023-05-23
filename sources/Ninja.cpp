@@ -7,21 +7,13 @@
 #include <string>
 
 
-ariel::Ninja::~Ninja() {}
 
-ariel::Ninja::Ninja() {
-    this->name = "UNKNOWN";
-    this->location = ariel::Point();
-    this->boolIsNinja = true;
-    this->speed = 0;
-    this->healthPoint = 0;
-}
+ariel::Ninja::Ninja(const std::string& name, const Point& location, int speed, int healthPoint) 
+: ariel::Character(name, location, healthPoint), speed(speed){this->setNinja();}
 
 void ariel::Ninja::slash(Character *other){
-    if (!(this->isAlive() && other->isAlive() && this!=other)) {
-        throw std::runtime_error("the ninja or the target is already dead");
-    }
-    if (this->distance(other) < 1) {
+    this->charErrorHandler(other);
+    if (this->distance(other) <=1 ) {
         other->hit(40);
     }
 }
@@ -30,24 +22,32 @@ int ariel::Ninja::getSpeed()const{
     return this->speed;
 }
 
+void ariel::Ninja::setSpeed(int speed){
+     this->speed = speed;
+}
+
 void ariel::Ninja::move(Character *other){
     ariel::Point new_location = ariel::Point::moveTowards(this->getLocation(), other->getLocation(), this->getSpeed());
     this->setLocation(new_location);
 }
 
 void ariel::Ninja::attack(ariel::Character* other){
-    this->slash(other);
+    if (this->distance(other) <= 1) {
+        this->slash(other);
+    }else {
+    this->move(other);
+    }
 }
 
 std::string ariel::Ninja::print() const{
     if (this->isAlive()) { 
         return  "N-" 
-            +  this->name 
-            + ","
-            + std::to_string(this->healthPoint)
-            + ","
-            + (this->location.toString()) 
-            + "." ;
+        +  this->getName()
+        + ","
+        + std::to_string(this->getHealthPoint())
+        + ","
+        + (this->getLocation().toString()) 
+        + "." ;
     }else {
         return "";
     }

@@ -9,7 +9,7 @@ namespace ariel {
 
 
 class Character {
-protected:
+private:
     ariel::Point location;
     int healthPoint;
     std::string name;
@@ -17,20 +17,28 @@ protected:
     bool boolIsNinja = false;
 
 public:
-    Character();
+    Character(const std::string& name = "UNKNOWN", const Point& location = Point(), int healthPoint = 0);
     virtual ~Character();
+    Character(const Character& other);
+    Character& operator=(const Character& other);
+    Character(Character&& other) noexcept;
+    Character& operator=(Character&& other) noexcept; 
     ariel::Point getLocation() const;
     void setLocation(ariel::Point new_location);
+    void setHealthPoint(int newPoint );
+    void setTeamMember(int new_id);
+    int getTeamID() const;
+    void setName(const std::string& new_name);
+    void setNinja();
     int getHealthPoint() const;
     bool isATeamMember() const;
     bool isNinja() const;
-    void setTeamMember(int new_id);
     virtual void attack(ariel::Character* victim) = 0;
-    void setHealthPoint(int newPoint );
     std::string getName() const;
-    void  setName(std::string new_name);
     bool isAlive() const;
     double distance(Character* other) const;
+    void charErrorHandler(ariel::Character* other);
+    void charErrorHandler();
     void hit(int damage_points);
     virtual std::string print() const = 0;
 };
