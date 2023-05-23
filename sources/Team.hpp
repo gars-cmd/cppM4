@@ -38,7 +38,7 @@ public:
     void setLeader(ariel::Character& leader);
     std::size_t indexOfLastSortedCowboy() ;
     int stillAlive();
-    void attack(ariel::Team* ennemyTeam);
+    virtual void attack(ariel::Team* ennemyTeam);
     virtual void print();
     bool isLeaderAlive();
     void replaceLeader();

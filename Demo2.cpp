@@ -1,9 +1,11 @@
 #include "sources/Character.hpp"
 #include "sources/OldNinja.hpp"
+#include "sources/Point.hpp"
 #include "sources/YoungNinja.hpp"
 #include "sources/TrainedNinja.hpp"
 #include "sources/Cowboy.hpp"
 #include "sources/Team.hpp"
+#include "sources/SmartTeam.hpp"
 #include "sources/Team2.hpp"
 #include <random>
 #include <chrono>
@@ -28,6 +30,8 @@ double random_float(double min = -100, double max = 100) {
             }
         }
     };
+
+
 
 auto create_yninja = [](double x = random_float(), double y = random_float()) {
     return new YoungNinja{"Bob", Point{x, y}};
@@ -66,6 +70,11 @@ auto simulate_battle = [](Team &team, Team &team2) {
             team2.attack(&team);
         }
         i++;
+    }
+    if (team.stillAlive() == 0) {
+        std::cout << "team right win" << std::endl;
+    }else {
+        std::cout << "team left win" << std::endl;
     }
 };
 //<-------------------------------------------------->
@@ -161,76 +170,93 @@ int main (int argc, char *argv[]) {
     // }
     //
     //
-    auto yn = YoungNinja();
-    auto yn1 = YoungNinja("YN1", ariel::Point(0,1));
-    auto yn2 = YoungNinja("YN2", ariel::Point(0,2));
-    auto yn3 = YoungNinja("YN3", ariel::Point(0,3));
+//     auto yn = YoungNinja();
+//     auto yn1 = YoungNinja("YN1", ariel::Point(0,1));
+//     auto yn2 = YoungNinja("YN2", ariel::Point(0,2));
+//     auto yn3 = YoungNinja("YN3", ariel::Point(0,3));
+//
+//     auto tn =  TrainedNinja();
+//     auto tn1 = TrainedNinja("TN1", ariel::Point(0,1));
+//     auto tn2 = TrainedNinja("TN2", ariel::Point(0,2));
+//     auto tn3 = TrainedNinja("TN3", ariel::Point(0,3));
+//
+//     auto on =  OldNinja();
+//     auto on1 = OldNinja("ON1", ariel::Point(0,1));
+//     auto on2 = OldNinja("ON2", ariel::Point(0,2));
+//     auto on3 = OldNinja("ON3", ariel::Point(0,3));
+//
+//     auto on4 = OldNinja("ON4", ariel::Point(0,4), 100);
+//     auto n1 = Ninja("N1", ariel::Point(0,5), 12, 100);
+//
+// std::cout << yn.print() << std::endl;
+// std::cout << yn1.print() << std::endl;
+// std::cout << n1.print() << std::endl;
+// std::cout << yn2.print() << std::endl;
+// std::cout << yn3.print() << std::endl;
+//
+// std::cout << tn.print() << std::endl;
+// std::cout << tn1.print() << std::endl;
+// std::cout << tn2.print() << std::endl;
+// std::cout << tn3.print() << std::endl;
+//
+// std::cout << on.print() << std::endl;
+// std::cout << on1.print() << std::endl;
+// std::cout << on2.print() << std::endl;
+// std::cout << on3.print() << std::endl;
+// std::cout << on4.print() << std::endl;
+//
+//
+// std::cout <<  yn.getName() << std::endl;
+// std::cout << yn1.getName() << std::endl;
+// std::cout << n1.getName() << std::endl;
+// std::cout << yn2.getName() << std::endl;
+// std::cout << yn3.getName() << std::endl;
+//
+// std::cout <<  tn.getName() << std::endl;
+// std::cout << tn1.getName() << std::endl;
+// std::cout << tn2.getName() << std::endl;
+// std::cout << tn3.getName() << std::endl;
+//
+// std::cout <<  on.getName() << std::endl;
+// std::cout << on1.getName() << std::endl;
+// std::cout << on2.getName() << std::endl;
+// std::cout << on3.getName() << std::endl;
+// std::cout << on4.getName() << std::endl;
+//
+//
+// std::cout <<  yn.getHealthPoint() << std::endl;
+// std::cout << yn1.getHealthPoint() << std::endl;
+// std::cout << n1.getHealthPoint() << std::endl;
+// std::cout << yn2.getHealthPoint() << std::endl;
+// std::cout << yn3.getHealthPoint() << std::endl;
+//
+// std::cout <<  tn.getHealthPoint() << std::endl;
+// std::cout << tn1.getHealthPoint() << std::endl;
+// std::cout << tn2.getHealthPoint() << std::endl;
+// std::cout << tn3.getHealthPoint() << std::endl;
+//
+// std::cout <<  on.getHealthPoint() << std::endl;
+// std::cout << on1.getHealthPoint() << std::endl;
+// std::cout << on2.getHealthPoint() << std::endl;
+// std::cout << on3.getHealthPoint() << std::endl;
+// std::cout << on4.getHealthPoint() << std::endl;
 
-    auto tn =  TrainedNinja();
-    auto tn1 = TrainedNinja("TN1", ariel::Point(0,1));
-    auto tn2 = TrainedNinja("TN2", ariel::Point(0,2));
-    auto tn3 = TrainedNinja("TN3", ariel::Point(0,3));
+auto leader1 = random_char();
+auto leader2 = random_char();
+Team team(leader1);
+SmartTeam smart(leader2);
+for (size_t i = 0; i < 18; i++) {
+    auto new_player = random_char();
+    if (i%2 ==0 ) {
+        team.add(new_player);
+    }else{
+        smart.add(new_player);
+    }
+}
 
-    auto on =  OldNinja();
-    auto on1 = OldNinja("ON1", ariel::Point(0,1));
-    auto on2 = OldNinja("ON2", ariel::Point(0,2));
-    auto on3 = OldNinja("ON3", ariel::Point(0,3));
-
-    auto on4 = OldNinja("ON4", ariel::Point(0,4), 100);
-    auto n1 = Ninja("N1", ariel::Point(0,5), 12, 100);
-
-std::cout << yn.print() << std::endl;
-std::cout << yn1.print() << std::endl;
-std::cout << n1.print() << std::endl;
-std::cout << yn2.print() << std::endl;
-std::cout << yn3.print() << std::endl;
-
-std::cout << tn.print() << std::endl;
-std::cout << tn1.print() << std::endl;
-std::cout << tn2.print() << std::endl;
-std::cout << tn3.print() << std::endl;
-
-std::cout << on.print() << std::endl;
-std::cout << on1.print() << std::endl;
-std::cout << on2.print() << std::endl;
-std::cout << on3.print() << std::endl;
-std::cout << on4.print() << std::endl;
+simulate_battle(team , smart);
 
 
-std::cout <<  yn.getName() << std::endl;
-std::cout << yn1.getName() << std::endl;
-std::cout << n1.getName() << std::endl;
-std::cout << yn2.getName() << std::endl;
-std::cout << yn3.getName() << std::endl;
-
-std::cout <<  tn.getName() << std::endl;
-std::cout << tn1.getName() << std::endl;
-std::cout << tn2.getName() << std::endl;
-std::cout << tn3.getName() << std::endl;
-
-std::cout <<  on.getName() << std::endl;
-std::cout << on1.getName() << std::endl;
-std::cout << on2.getName() << std::endl;
-std::cout << on3.getName() << std::endl;
-std::cout << on4.getName() << std::endl;
-
-
-std::cout <<  yn.getHealthPoint() << std::endl;
-std::cout << yn1.getHealthPoint() << std::endl;
-std::cout << n1.getHealthPoint() << std::endl;
-std::cout << yn2.getHealthPoint() << std::endl;
-std::cout << yn3.getHealthPoint() << std::endl;
-
-std::cout <<  tn.getHealthPoint() << std::endl;
-std::cout << tn1.getHealthPoint() << std::endl;
-std::cout << tn2.getHealthPoint() << std::endl;
-std::cout << tn3.getHealthPoint() << std::endl;
-
-std::cout <<  on.getHealthPoint() << std::endl;
-std::cout << on1.getHealthPoint() << std::endl;
-std::cout << on2.getHealthPoint() << std::endl;
-std::cout << on3.getHealthPoint() << std::endl;
-std::cout << on4.getHealthPoint() << std::endl;
 
 }
 

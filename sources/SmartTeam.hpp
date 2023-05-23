@@ -12,10 +12,11 @@
 namespace ariel {
 
 class SmartTeam : public ariel::Team {
-    // using ariel::Team::Team;
+    using ariel::Team::Team;
 
 public:
-    void sort() override;
+    void attack(Team* ennemyTeam) override;
+    Character* getWeakerEnnemy(Team* ennemyTeam);
 };
 
 }
