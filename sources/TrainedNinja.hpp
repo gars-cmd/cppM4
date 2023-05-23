@@ -1,3 +1,4 @@
+#pragma once
 #ifndef TRAINEDNINJA
 #define TRAINEDNINJA
 

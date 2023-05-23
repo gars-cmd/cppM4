@@ -1,8 +1,7 @@
 #include <algorithm>
 #include <iostream>
-#include "Point.hpp"
 #include "Character.hpp"
-#include "Ninja.hpp"
+#include "Point.hpp"
 #include "Ninja.hpp"
 #include "Cowboy.hpp"
 #include "Team.hpp"
@@ -26,6 +25,17 @@ ariel::Character* ariel::SmartTeam::getWeakerEnnemy(Team* ennemyTeam){
     return target;
 }
 
+ariel::Character* ariel::SmartTeam::getCloserEnnemy(Character* teammate, Team* ennemyTeam){
+    Character* target = nullptr;
+    int min_ennemy_dist = std::numeric_limits<int>::max();
+    for (Character* player : ennemyTeam->getVec()) {
+        if (player->isAlive() && teammate->isAlive() && player->distance(teammate) < min_ennemy_dist) {
+            min_ennemy_dist = player->distance(teammate);
+            target = player;
+        }
+    }
+    return target;
+}
 
 
 
@@ -35,7 +45,12 @@ void ariel::SmartTeam::attack(Team* ennemyTeam){
     if (ennemyTeam != nullptr && ennemyTeam->stillAlive()!=0) {
         for (ariel::Character* player : this->getVec()) {
             this->liveReplacement(ennemyTeam);
-            ariel::Character* new_victim = this->getWeakerEnnemy(ennemyTeam) ;
+            ariel::Character* new_victim = nullptr;
+            if (player->isNinja()) {
+                 new_victim = this->getCloserEnnemy(player, ennemyTeam) ;
+            }else {
+                 new_victim = this->getWeakerEnnemy(ennemyTeam) ;
+            }
             if (new_victim!=nullptr) {
                 if (player!=nullptr && player->isAlive() && new_victim->isAlive()) {
                     player->attack(new_victim);

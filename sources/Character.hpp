@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
@@ -33,11 +34,11 @@ public:
     int getHealthPoint() const;
     bool isATeamMember() const;
     bool isNinja() const;
-    virtual void attack(ariel::Character* victim) = 0;
+    virtual void attack(Character* victim) = 0;
     std::string getName() const;
     bool isAlive() const;
     double distance(Character* other) const;
-    void charErrorHandler(ariel::Character* other);
+    void charErrorHandler(Character* other);
     void charErrorHandler();
     void hit(int damage_points);
     virtual std::string print() const = 0;

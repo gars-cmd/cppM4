@@ -1,3 +1,4 @@
+#pragma once
 #ifndef OLDNINJA
 #define OLDNINJA
 

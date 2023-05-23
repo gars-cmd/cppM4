@@ -1,3 +1,4 @@
+#pragma once
 #ifndef TEAM_HPP
 #define TEAM_HPP
 
@@ -32,24 +33,24 @@ public:
     Team& operator=(Team&& other) noexcept;// Move assignment operator
     Team(const Team& other);
     void setSize(int newSize);
-    std::vector<Character*> getVec();
+    std::vector<ariel::Character*> getVec();
     virtual void sort();
     ariel::Character* getLeader() const;
     void setLeader(ariel::Character& leader);
     std::size_t indexOfLastSortedCowboy() ;
     int stillAlive();
-    virtual void attack(ariel::Team* ennemyTeam);
+    virtual void attack(Team* ennemyTeam);
     virtual void print();
     bool isLeaderAlive();
     void replaceLeader();
     bool isSorted();
     std::size_t firstNinjaIndex();
     ariel::Character* getCloserFromLeaderIntern();
-    ariel::Character* getCloserFromLeaderExtern(ariel::Team* otherTeam);
+    ariel::Character* getCloserFromLeaderExtern(Team* otherTeam);
     void addErrorHandler(ariel::Character* new_player);
     void moveSaveAddOrder(std::size_t last_continues_cowboy_index, std::size_t cowboy_index);
-    void attackErrorHandler(ariel::Team *ennemyTeam);
-    void liveReplacement(ariel::Team *ennemyTeam);
+    void attackErrorHandler(Team *ennemyTeam);
+    void liveReplacement(Team *ennemyTeam);
 };
 
 }

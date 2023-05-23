@@ -13,6 +13,8 @@
 
 using namespace ariel;
 using namespace std;
+
+static int counter = 0;
 //<--------------------Helper Functions-------------------->
 //https://www.geeksforgeeks.org/generate-a-random-float-number-in-cpp/
 double random_float(double min = -100, double max = 100) {
@@ -72,9 +74,7 @@ auto simulate_battle = [](Team &team, Team &team2) {
         i++;
     }
     if (team.stillAlive() == 0) {
-        std::cout << "team right win" << std::endl;
-    }else {
-        std::cout << "team left win" << std::endl;
+        counter++;
     }
 };
 //<-------------------------------------------------->
@@ -240,21 +240,24 @@ int main (int argc, char *argv[]) {
 // std::cout << on2.getHealthPoint() << std::endl;
 // std::cout << on3.getHealthPoint() << std::endl;
 // std::cout << on4.getHealthPoint() << std::endl;
-
-auto leader1 = random_char();
-auto leader2 = random_char();
-Team team(leader1);
-SmartTeam smart(leader2);
-for (size_t i = 0; i < 18; i++) {
-    auto new_player = random_char();
-    if (i%2 ==0 ) {
-        team.add(new_player);
-    }else{
-        smart.add(new_player);
+int w = 0;
+while (w < 1000) {
+    auto leader1 = random_char();
+    auto leader2 = random_char();
+    Team team(leader1);
+    SmartTeam smart(leader2);
+    for (size_t i = 0; i < 18; i++) {
+        auto new_player = random_char();
+        if (i%2 ==0 ) {
+            team.add(new_player);
+        }else{
+            smart.add(new_player);
+        }
     }
+    simulate_battle(team , smart);
+    w++;
 }
-
-simulate_battle(team , smart);
+std::cout << "win-rate for smartTeam on 1000 battles : " << (((double)counter/1000))*100 <<"%" << std::endl;
 
 
 

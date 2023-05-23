@@ -1,3 +1,4 @@
+#pragma once
 #ifndef SMARTTEAM_HPP
 #define SMARTTEAM_HPP
 
@@ -17,6 +18,7 @@ class SmartTeam : public ariel::Team {
 public:
     void attack(Team* ennemyTeam) override;
     Character* getWeakerEnnemy(Team* ennemyTeam);
+    Character* getCloserEnnemy(Character* teammate, Team* ennemyTeam);
 };
 
 }

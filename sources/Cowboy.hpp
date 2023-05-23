@@ -1,3 +1,4 @@
+#pragma once
 #ifndef COWBOY_HPP
 #define COWBOY_HPP
 
