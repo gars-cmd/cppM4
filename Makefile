@@ -1,8 +1,8 @@
 #!make -f
 
-CXX=clang++-15
+CXX=clang++-14
 CXXVERSION=c++2a
-TIDY=clang-tidy
+TIDY=clang-tidy-14
 SOURCE_PATH=sources
 OBJECT_PATH=objects
 CXXFLAGS=-std=$(CXXVERSION) -Werror -Wsign-conversion -I$(SOURCE_PATH)
@@ -16,9 +16,6 @@ OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 run: test
 
 demo: Demo.o $(OBJECTS) 
-	$(CXX) $(CXXFLAGS) $^ -o $@
-
-demo2: Demo2.o $(OBJECTS) 
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 test: TestRunner.o StudentTest1.o  $(OBJECTS)
