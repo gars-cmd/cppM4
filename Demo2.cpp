@@ -131,7 +131,6 @@ int main (int argc, char *argv[]) {
     // team2.add(c9);
     // team2.print();
     
-
     //
     // Team team{create_cowboy(-1, -1)};
     // team.add(create_yninja(0, 0));
@@ -223,23 +222,21 @@ int main (int argc, char *argv[]) {
 // std::cout << on3.getName() << std::endl;
 // std::cout << on4.getName() << std::endl;
 //
-//
-// std::cout <<  yn.getHealthPoint() << std::endl;
-// std::cout << yn1.getHealthPoint() << std::endl;
-// std::cout << n1.getHealthPoint() << std::endl;
-// std::cout << yn2.getHealthPoint() << std::endl;
-// std::cout << yn3.getHealthPoint() << std::endl;
-//
-// std::cout <<  tn.getHealthPoint() << std::endl;
-// std::cout << tn1.getHealthPoint() << std::endl;
-// std::cout << tn2.getHealthPoint() << std::endl;
-// std::cout << tn3.getHealthPoint() << std::endl;
-//
-// std::cout <<  on.getHealthPoint() << std::endl;
-// std::cout << on1.getHealthPoint() << std::endl;
-// std::cout << on2.getHealthPoint() << std::endl;
-// std::cout << on3.getHealthPoint() << std::endl;
-// std::cout << on4.getHealthPoint() << std::endl;
+
+    Point p1(1,1);
+    Point p2(2,2);
+    Point p3(3,3);
+    Point p9(9,9);
+
+    std::cout << "p1 dist p2 " << p1.distance(p2) << std::endl;
+    std::cout << "p2 dist p3 " << p2.distance(p3) << std::endl;
+    std::cout << "p3 dist p4 " << p3.distance(p9) << std::endl;
+
+    std::cout << "move toward p1 -> p2 " << p1.moveTowards(p1, p2, 2).toString() << std::endl;
+    std::cout << "move toward p2 -> p3 " << p2.moveTowards(p2, p3, 0).toString() << std::endl;
+    std::cout << "move toward p3 -> p9 " << p3.moveTowards(p3, p9, 4).toString() << std::endl;
+
+
 int w = 0;
 while (w < 1000) {
     auto leader1 = random_char();

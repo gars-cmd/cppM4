@@ -276,6 +276,7 @@ void ariel::Team::attack(ariel::Team *ennemyTeam){
                 if (player!=nullptr && player->isAlive() && new_victim->isAlive()) {
                     player->attack(new_victim);
                 }
+            }else {
             }
         }
     }

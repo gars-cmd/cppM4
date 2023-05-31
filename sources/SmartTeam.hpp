@@ -19,6 +19,9 @@ public:
     void attack(Team* ennemyTeam) override;
     Character* getWeakerEnnemy(Team* ennemyTeam);
     Character* getCloserEnnemy(Character* teammate, Team* ennemyTeam);
+    int numOfNinjaEnnemy(ariel::Team* ennemyTeam);
+    ariel::Character* getCloserNinjaEnnemy(Character* Teammate, Team* ennemyTeam);
+    ariel::Character* getCloserToTheTeamTarget(Team* ennemyTeam);
 };
 
 }

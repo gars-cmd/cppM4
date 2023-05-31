@@ -8,7 +8,7 @@ using namespace ariel;
 ariel::Character::~Character(){}
 
 ariel::Character::Character(const std::string& name, const Point& location, int healthPoint)
-: name{name}, location{location}, healthPoint{healthPoint}{}
+    : name{name}, location{location}, healthPoint{healthPoint}{}
 
 ariel::Character::Character(const Character& other)
 : location(other.location), healthPoint(other.healthPoint), name(other.name),

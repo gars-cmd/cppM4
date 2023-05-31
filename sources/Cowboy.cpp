@@ -9,7 +9,7 @@ constexpr int MAGAZINE_CAPACITY = 6;
 
 
 ariel::Cowboy::Cowboy(const std::string& name, const Point& location, int healthPoint) 
-: ariel::Character(name, location, healthPoint), bullet_ammount(MAGAZINE_CAPACITY){}
+    : ariel::Character(name, location, healthPoint), bullet_ammount(MAGAZINE_CAPACITY){}
 
 
 int ariel::Cowboy::getBulletAmmount() const{ return this->bullet_ammount; }

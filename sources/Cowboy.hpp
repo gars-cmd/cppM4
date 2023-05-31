@@ -17,16 +17,11 @@ private:
 
 public:
     Cowboy(const std::string& name = "UNKNOWN", const Point& location = Point(), int healthPoint = COWBOY_HP);
-    // ~Cowboy();
-    // Cowboy(std::string name);
-    // Cowboy(std::string name, ariel::Point location);
-    // Cowboy(ariel::Point location);
+
     int getBulletAmmount() const;
     std::string print() const override;
     bool hasboolets() const;
     void reload();
-    // void cowboyErrorHandler(ariel::Character* other);
-    // void cowboyErrorHandler();
     void shoot( ariel::Character* other) ;
     void attack( ariel::Character* other) override;
 };
